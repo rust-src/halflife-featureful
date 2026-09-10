@@ -1561,7 +1561,10 @@ int CStudioModelRenderer::StudioDrawPlayer( int flags, entity_state_t *pplayer )
 	if( m_nPlayerIndex < 0 || m_nPlayerIndex >= gEngfuncs.GetMaxClients() )
 		return 0;
 
+	const float devValue = m_pCvarDeveloper->value;
+	m_pCvarDeveloper->value = 0;
 	m_pRenderModel = IEngineStudio.SetupPlayerModel( m_nPlayerIndex );
+	m_pCvarDeveloper->value = devValue;
 	if( m_pRenderModel == NULL )
 		return 0;
 
@@ -2203,7 +2206,7 @@ void CStudioModelRenderer::HandlePlayerModel(entity_state_t *pplayer, alight_t& 
 		m_pCurrentEntity->curstate.body = 255;
 	}
 
-	if( !( m_pCvarDeveloper->value == 0 && gEngfuncs.GetMaxClients() == 1 ) && ( m_pRenderModel == m_pCurrentEntity->model ) )
+	if( gEngfuncs.GetMaxClients() != 1 && ( m_pRenderModel == m_pCurrentEntity->model ) )
 	{
 		m_pCurrentEntity->curstate.body = 1; // force helmet
 	}
