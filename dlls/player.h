@@ -275,7 +275,7 @@ public:
 	TakeDamageResult TakeDamage(entvars_t* pevInflictor, entvars_t* pevAttacker, const DamageInfo& damageInfo) override;
 	KilledResult Killed( entvars_t *pevInflictor, entvars_t *pevAttacker, int iGib ) override;
 	Vector BodyTarget( const Vector &posSrc ) override {
-		if (pev->waterlevel > WL_Feet)
+		if (m_Activity == ACT_HOVER || m_Activity == ACT_SWIM)
 			return Center() + Vector(0,0,RANDOM_FLOAT(0.0f, 4.0f)); // underwater the player's hitbox is more "flattened" so aim more at the center
 		return Center() + pev->view_ofs * RANDOM_FLOAT( 0.5f, 1.1f ); // position to shoot at
 	}
