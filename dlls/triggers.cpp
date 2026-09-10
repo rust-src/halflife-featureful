@@ -6076,7 +6076,7 @@ public:
 		FACEMODE_ROTATE,
 		FACEMODE_ROTATE_BY_VALUES,
 		FACEMODE_SET_ANGULAR_VELOCITY,
-		FACEMODE_SET_VELOCITY,
+		FACEMODE_SET_ANGLES,
 	};
 };
 LINK_ENTITY_TO_CLASS( motion_thread, CMotionThread )
@@ -6234,7 +6234,7 @@ void CMotionThread::MotionThink()
 			printAffect("DEBUG: Set avelocity", m_hTarget->pev->avelocity, vecTemp);
 			UTIL_SetAvelocity(m_hTarget, vecTemp);
 			break;
-		case FACEMODE_SET_VELOCITY:
+		case FACEMODE_SET_ANGLES:
 		{
 			CBaseEntity *pCalc = UTIL_FindEntityByTargetname(NULL, STRING(m_iszFacing), m_hLocus);
 			if (pCalc != NULL)
